@@ -1,7 +1,7 @@
 # Личный проект «Шесть городов»
 
 * Студент: [Илья Атучин](https://up.htmlacademy.ru/univer-nodejs-api/5/user/2673241).
-* Наставник: `Неизвестно`.
+* Наставник: [Глеб Клецков](https://htmlacademy.ru/profile/id1487865).
 
 ---
 
