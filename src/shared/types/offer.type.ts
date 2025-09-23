@@ -1,8 +1,18 @@
-export type City = 'Paris' | 'Cologne' | 'Brussels' | 'Amsterdam' | 'Hamburg' | 'Dusseldorf';
+import { CITIES, HOUSING_TYPE, GOODS } from '../constants/app.constants.js';
 
-export type HousingType = 'apartment' | 'house' | 'room' | 'hotel';
+export type City = typeof CITIES[number];
+export type HousingType = typeof HOUSING_TYPE[number];
+export type Good = typeof GOODS[number];
 
-export type Good = 'Breakfast' | 'Air conditioning' | 'Laptop friendly workspace' | 'Baby seat' | 'Washer' | 'Towels' | 'Fridge';
+export function isKey<A extends string>(str: string, array: Readonly<Array<A>>): A | undefined {
+  const foundKey = array.find((val) => val === str);
+
+  if (!foundKey) {
+    return;
+  }
+
+  return foundKey;
+}
 
 export interface Offer {
   title: string;

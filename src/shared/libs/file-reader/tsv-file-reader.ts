@@ -1,15 +1,7 @@
 import { FileReader } from './file-reader.interface.js';
 import { readFileSync } from 'node:fs';
-import { Offer, City, Good, HousingType } from '../../types/index.js';
-
-const CITIES: Record<string, City> = {
-  Paris: 'Paris',
-  Cologne: 'Cologne',
-  Brussels: 'Brussels',
-  Amsterdam: 'Amsterdam',
-  Hamburg: 'Hamburg',
-  Dusseldorf: 'Dusseldorf',
-};
+import { Offer, isKey } from '../../types/index.js';
+import { CITIES, HOUSING_TYPE, GOODS } from '../../constants/app.constants.js';
 
 export class TSVFileReader implements FileReader {
   private rawData = '';
@@ -35,17 +27,17 @@ export class TSVFileReader implements FileReader {
         title,
         description,
         postDate: new Date(postDate),
-        city: CITIES[cityName],
+        city: isKey(cityName, CITIES) ?? CITIES[0],
         previewImage,
         images: images.split(';'),
         isPremium: isPremium === 'true',
         isFavorite: isFavorite === 'true',
         rating: parseFloat(rating),
-        type: type as HousingType,
+        type: isKey(type, HOUSING_TYPE) ?? HOUSING_TYPE[0],
         bedrooms: parseInt(bedrooms, 10),
         maxAdults: parseInt(maxAdults, 10),
         price: parseInt(price, 10),
-        goods: goods.split(';') as Good[],
+        goods: goods.split(';').map((g) => isKey(g, GOODS) ?? GOODS[0]),
         author,
         commentsCount: parseInt(commentsCount, 10),
         latitude: parseFloat(latitude),
