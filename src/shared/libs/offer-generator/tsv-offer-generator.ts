@@ -6,12 +6,14 @@ import {
   getRandomItem,
   getRandomItems,
   getRandomBoolean,
-  generateRandomCoordinate
+  generateRandomCoordinate,
+  shortenName
 } from '../../helpers/index.js';
 import {
   CITIES,
   GOODS,
   HOUSING_TYPE,
+  USER_TYPE,
   MIN_PRICE,
   MAX_PRICE,
   MIN_RATING,
@@ -48,7 +50,10 @@ export class TSVOfferGenerator implements OfferGenerator {
     const maxAdults = generateRandomValue(MIN_ADULTS, MAX_ADULTS).toString();
     const price = generateRandomValue(MIN_PRICE, MAX_PRICE).toString();
     const selectedGoods = getRandomItems([...GOODS]).join(';');
-    const author = getRandomItem<string>(this.mockData.emails).toString();
+    const authorName = shortenName(getRandomItem<string>(this.mockData.names).toString());
+    const authorEmail = getRandomItem<string>(this.mockData.emails).toString();
+    const authorAvatar = getRandomItem<string>(this.mockData.avatarPaths).toString();
+    const authorType = getRandomItem([...USER_TYPE]).toString();
     const commentsCount = generateRandomValue(MIN_COMMENTS, MAX_COMMENTS).toString();
     const randomCoordinates = generateRandomCoordinate(city);
     const coordinates = { latitude: randomCoordinates.latitude.toString(), longitude: randomCoordinates.longitude.toString() };
@@ -71,7 +76,10 @@ export class TSVOfferGenerator implements OfferGenerator {
       maxAdults,
       price,
       selectedGoods,
-      author,
+      authorName,
+      authorEmail,
+      authorAvatar,
+      authorType,
       commentsCount,
       coordinates.latitude,
       coordinates.longitude,

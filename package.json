@@ -16,11 +16,13 @@
         "compile": "tsc -p tsconfig.json",
         "clean": "rimraf dist",
         "ts": "tsx",
+        "cli": "npm run ts ./src/main.cli.ts --",
         "mock:server": "json-server ./mocks/mock-server-data.json --port 3123"
     },
     "devDependencies": {
         "@types/convict": "^6.1.6",
         "@types/convict-format-with-validator": "^6.0.5",
+        "@types/mongoose": "^5.11.96",
         "@types/node": "^18.19.127",
         "@typescript-eslint/eslint-plugin": "5.46.0",
         "@typescript-eslint/parser": "5.46.0",
@@ -40,13 +42,15 @@
         "npm": ">=8"
     },
     "dependencies": {
+        "@typegoose/typegoose": "11.5.0",
         "chalk": "^5.6.2",
         "convict": "^6.2.4",
         "convict-format-with-validator": "^6.2.0",
         "dayjs": "^1.11.18",
         "dotenv": "^17.2.3",
         "got": "^12.6.1",
-        "inversify": "^7.10.2",
+        "inversify": "^6.0.2",
+        "mongoose": "7.5.3",
         "pino": "^10.0.0",
         "reflect-metadata": "^0.2.2"
     }

@@ -1,5 +1,5 @@
 import { Offer } from '../types/index.js';
-import { CITIES, GOODS, HOUSING_TYPE } from '../constants/app.constants.js';
+import { CITIES, GOODS, HOUSING_TYPE, USER_TYPE } from '../constants/app.constants.js';
 import { isKey, findCity } from '../types/offer.type.js';
 
 export function createOffer(offerData: string): Offer {
@@ -18,7 +18,10 @@ export function createOffer(offerData: string): Offer {
     maxAdults,
     price,
     goods,
-    author,
+    authorName,
+    authorEmail,
+    authorAvatar,
+    authorType,
     commentsCount,
     latitude,
     longitude
@@ -41,9 +44,16 @@ export function createOffer(offerData: string): Offer {
     goods: goods.split(';')
       .map((g) => isKey(g, GOODS))
       .filter((item): item is typeof GOODS[number] => item !== undefined),
-    author,
+    author: {
+      name: authorName,
+      email: authorEmail,
+      avatarUrl: authorAvatar,
+      password: '',
+      type: isKey(authorType, USER_TYPE) ?? USER_TYPE[0]
+    },
     commentsCount: parseInt(commentsCount, 10),
     latitude: parseFloat(latitude),
     longitude: parseFloat(longitude),
   };
 }
+

@@ -1,8 +1,9 @@
 import { CITIES, HOUSING_TYPE, GOODS } from '../constants/app.constants.js';
+import { User } from './user.type.js';
 
 export type City = typeof CITIES[number];
 export type HousingType = typeof HOUSING_TYPE[number];
-export type Good = typeof GOODS[number]
+export type Good = typeof GOODS[number];
 
 export function isKey<T extends string>(str: string, array: Readonly<Array<T>>): T | undefined {
   return array.find((val) => val === str);
@@ -27,8 +28,9 @@ export interface Offer {
   maxAdults: number;
   price: number;
   goods: Good[];
-  author: string;
+  author: User;
   commentsCount: number;
   latitude: number;
   longitude: number;
 }
+
