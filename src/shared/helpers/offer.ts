@@ -52,8 +52,10 @@ export function createOffer(offerData: string): Offer {
       type: isKey(authorType, USER_TYPE) ?? USER_TYPE[0]
     },
     commentsCount: parseInt(commentsCount, 10),
-    latitude: parseFloat(latitude),
-    longitude: parseFloat(longitude),
+    location: {
+      latitude: parseFloat(latitude),
+      longitude: parseFloat(longitude),
+    },
   };
 }
 

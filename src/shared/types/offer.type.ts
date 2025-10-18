@@ -30,7 +30,9 @@ export interface Offer {
   goods: Good[];
   author: User;
   commentsCount: number;
-  latitude: number;
-  longitude: number;
+  location: {
+    latitude: number;
+    longitude: number;
+  };
 }
 
