@@ -29,7 +29,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createUser'
+              $ref: "#/components/schemas/createUser"
         required: true
 
       responses:
@@ -38,7 +38,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user'
+                $ref: "#/components/schemas/user"
 
         "409":
           description: Пользователь с таким email уже существует.
@@ -59,7 +59,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/loginUser'
+              $ref: "#/components/schemas/loginUser"
         required: true
 
       responses:
@@ -68,7 +68,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/authToken'
+                $ref: "#/components/schemas/authToken"
 
         "401":
           description: Неверный логин или пароль.
@@ -108,7 +108,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/user'
+                $ref: "#/components/schemas/user"
 
         "401":
           description: Пользователь не авторизован.
@@ -138,7 +138,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/offerListItem'
+                  $ref: "#/components/schemas/offerListItem"
 
     post:
       tags:
@@ -155,7 +155,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createOffer'
+              $ref: "#/components/schemas/createOffer"
         required: true
 
       responses:
@@ -164,7 +164,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/offer'
+                $ref: "#/components/schemas/offer"
 
         "400":
           description: Ошибка валидации данных.
@@ -194,7 +194,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/offer'
+                $ref: "#/components/schemas/offer"
 
         "404":
           description: Предложение не найдено.
@@ -222,7 +222,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/updateOffer'
+              $ref: "#/components/schemas/updateOffer"
         required: true
 
       responses:
@@ -231,7 +231,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/offer'
+                $ref: "#/components/schemas/offer"
 
         "400":
           description: Ошибка валидации данных.
@@ -301,7 +301,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/offerListItem'
+                  $ref: "#/components/schemas/offerListItem"
 
   /offers/favorites:
     get:
@@ -322,7 +322,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/offerListItem'
+                  $ref: "#/components/schemas/offerListItem"
 
         "401":
           description: Пользователь не авторизован.
@@ -352,7 +352,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/offer'
+                $ref: "#/components/schemas/offer"
 
         "401":
           description: Пользователь не авторизован.
@@ -384,7 +384,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/offer'
+                $ref: "#/components/schemas/offer"
 
         "401":
           description: Пользователь не авторизован.
@@ -416,7 +416,7 @@ paths:
               schema:
                 type: array
                 items:
-                  $ref: '#/components/schemas/comment'
+                  $ref: "#/components/schemas/comment"
 
         "404":
           description: Предложение не найдено.
@@ -444,7 +444,7 @@ paths:
         content:
           application/json:
             schema:
-              $ref: '#/components/schemas/createComment'
+              $ref: "#/components/schemas/createComment"
         required: true
 
       responses:
@@ -453,7 +453,7 @@ paths:
           content:
             application/json:
               schema:
-                $ref: '#/components/schemas/comment'
+                $ref: "#/components/schemas/comment"
 
         "400":
           description: Ошибка валидации данных.
@@ -491,7 +491,7 @@ components:
           type: string
           minLength: 6
           maxLength: 12
-          example: 123456
+          example: secret123
 
         type:
           type: string
@@ -515,7 +515,7 @@ components:
 
         password:
           type: string
-          example: 123456
+          example: secret123
 
       required:
         - email
@@ -527,7 +527,7 @@ components:
       properties:
         id:
           type: string
-          example: 6329c3d6a04ab1061c6425ea
+          example: 6537e4f8a04ab1061c6425ea
 
         name:
           type: string
@@ -552,7 +552,7 @@ components:
       properties:
         token:
           type: string
-          example: eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9...
+          example: T2xpdmVyLmNvbm5lckBnbWFpbC5jb20=
 
     createOffer:
       type: object
@@ -562,13 +562,13 @@ components:
           type: string
           minLength: 10
           maxLength: 100
-          example: Beautiful apartment in city center
+          example: Уютная квартира в центре Парижа
 
         description:
           type: string
           minLength: 20
           maxLength: 1024
-          example: A very nice apartment with great view
+          example: Прекрасная квартира с видом на Эйфелеву башню. Две спальни, современная кухня, все удобства.
 
         city:
           type: string
@@ -585,7 +585,8 @@ components:
             type: string
           minItems: 6
           maxItems: 6
-          example: [room1.jpg, room2.jpg, room3.jpg, room4.jpg, room5.jpg, room6.jpg]
+          example:
+            [room1.jpg, room2.jpg, room3.jpg, room4.jpg, room5.jpg, room6.jpg]
 
         isPremium:
           type: boolean
@@ -600,7 +601,7 @@ components:
           type: integer
           minimum: 1
           maximum: 8
-          example: 3
+          example: 2
 
         maxAdults:
           type: integer
@@ -612,14 +613,24 @@ components:
           type: integer
           minimum: 100
           maximum: 100000
-          example: 1200
+          example: 15000
 
         goods:
           type: array
           items:
             type: string
-            enum: [Breakfast, Air conditioning, Laptop friendly workspace, Baby seat, Washer, Towels, Fridge]
-          example: [Breakfast, Air conditioning, Laptop friendly workspace]
+            enum:
+              [
+                Breakfast,
+                Air conditioning,
+                Laptop friendly workspace,
+                Baby seat,
+                Washer,
+                Towels,
+                Fridge,
+              ]
+          example:
+            [Breakfast, Air conditioning, Laptop friendly workspace, Fridge]
 
         location:
           type: object
@@ -699,7 +710,16 @@ components:
           type: array
           items:
             type: string
-            enum: [Breakfast, Air conditioning, Laptop friendly workspace, Baby seat, Washer, Towels, Fridge]
+            enum:
+              [
+                Breakfast,
+                Air conditioning,
+                Laptop friendly workspace,
+                Baby seat,
+                Washer,
+                Towels,
+                Fridge,
+              ]
 
         location:
           type: object
@@ -715,11 +735,11 @@ components:
       properties:
         id:
           type: string
-          example: 6329c3d6a04ab1061c6425ea
+          example: 6537e4f8a03bc2350e9364rd
 
         title:
           type: string
-          example: Beautiful apartment in city center
+          example: Уютная квартира в центре Парижа
 
         type:
           type: string
@@ -728,7 +748,7 @@ components:
 
         price:
           type: integer
-          example: 1200
+          example: 15000
 
         city:
           type: string
@@ -750,16 +770,16 @@ components:
           type: number
           minimum: 1
           maximum: 5
-          example: 4.5
+          example: 4.8
 
         commentsCount:
           type: integer
-          example: 10
+          example: 8
 
         postDate:
           type: string
           format: date-time
-          example: 2024-01-15T12:00:00Z
+          example: 2025-10-19T10:30:00Z
 
     offer:
       type: object
@@ -771,16 +791,16 @@ components:
 
         title:
           type: string
-          example: Beautiful apartment in city center
+          example: Уютная квартира в центре Парижа
 
         description:
           type: string
-          example: A very nice apartment with great view
+          example: Прекрасная квартира с видом на Эйфелеву башню. Две спальни, современная кухня, все удобства.
 
         postDate:
           type: string
           format: date-time
-          example: 2024-01-15T12:00:00Z
+          example: 2025-10-19T10:30:00Z
 
         city:
           type: string
@@ -794,7 +814,8 @@ components:
           type: array
           items:
             type: string
-          example: [room1.jpg, room2.jpg, room3.jpg, room4.jpg, room5.jpg, room6.jpg]
+          example:
+            [room1.jpg, room2.jpg, room3.jpg, room4.jpg, room5.jpg, room6.jpg]
 
         isPremium:
           type: boolean
@@ -808,7 +829,7 @@ components:
           type: number
           minimum: 1
           maximum: 5
-          example: 4.5
+          example: 4.8
 
         type:
           type: string
@@ -817,7 +838,7 @@ components:
 
         bedrooms:
           type: integer
-          example: 3
+          example: 2
 
         maxAdults:
           type: integer
@@ -825,20 +846,21 @@ components:
 
         price:
           type: integer
-          example: 1200
+          example: 15000
 
         goods:
           type: array
           items:
             type: string
-          example: [Breakfast, Air conditioning, Laptop friendly workspace]
+          example:
+            [Breakfast, Air conditioning, Laptop friendly workspace, Fridge]
 
         host:
-          $ref: '#/components/schemas/user'
+          $ref: "#/components/schemas/user"
 
         commentsCount:
           type: integer
-          example: 10
+          example: 8
 
         location:
           type: object
@@ -858,7 +880,7 @@ components:
           type: string
           minLength: 5
           maxLength: 1024
-          example: Great place to stay!
+          example: Отличная квартира! Всё соответствует описанию, хозяин доброжелательный. Рекомендую!
 
         rating:
           type: integer
@@ -876,20 +898,20 @@ components:
       properties:
         id:
           type: string
-          example: 6329c3d6a04ab1061c6425ea
+          example: 6537e4f8a04ab1061c6425ec
 
         text:
           type: string
-          example: Great place to stay!
+          example: Отличная квартира! Всё соответствует описанию, хозяин доброжелательный. Рекомендую!
 
         postDate:
           type: string
           format: date-time
-          example: 2024-01-15T12:00:00Z
+          example: 2025-10-19T14:25:00Z
 
         rating:
           type: integer
           example: 5
 
         author:
-          $ref: '#/components/schemas/user'
+          $ref: "#/components/schemas/user"
