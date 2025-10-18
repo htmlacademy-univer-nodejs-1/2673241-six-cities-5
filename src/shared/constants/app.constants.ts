@@ -45,7 +45,22 @@ export const GOODS = [
 
 export const USER_TYPE = ['обычный', 'pro'] as const;
 
-export const MIN_PRICE = 1000;
+export const MIN_TITLE_LENGTH = 10;
+export const MAX_TITLE_LENGTH = 100;
+
+export const MIN_DESCRIPTION_LENGTH = 20;
+export const MAX_DESCRIPTION_LENGTH = 1024;
+
+export const MIN_LATITUDE = -90;
+export const MAX_LATITUDE = 90;
+
+export const MIN_LONGITUDE = -180;
+export const MAX_LONGITUDE = 180;
+
+export const MIN_NAME_LENGTH = 1;
+export const MAX_NAME_LENGTH = 15;
+
+export const MIN_PRICE = 100;
 export const MAX_PRICE = 100000;
 
 export const MIN_RATING = 1;
