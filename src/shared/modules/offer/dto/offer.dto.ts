@@ -17,7 +17,7 @@ export class OfferDto {
   public maxAdults!: number;
   public price!: number;
   public goods!: Good[];
-  public host!: UserDto;
+  public author!: UserDto;
   public commentsCount!: number;
   public location!: {
     latitude: number;

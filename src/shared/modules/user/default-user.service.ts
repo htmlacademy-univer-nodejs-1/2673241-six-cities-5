@@ -6,6 +6,7 @@ import { Component } from '../../types/index.js';
 import { Logger } from '../../libs/logger/index.js';
 import {CreateUserDto} from './dto/create-user.dto.js';
 import {UpdateUserDto} from './dto/update-user.dto.js';
+import { createSHA256 } from '../../helpers/index.js';
 
 @injectable()
 export class DefaultUserService implements UserService {
@@ -42,5 +43,10 @@ export class DefaultUserService implements UserService {
     return this.userModel
       .findByIdAndUpdate(userId, dto, { new: true })
       .exec();
+  }
+
+  public async verifyPassword(password: string, hashedPassword: string, salt: string): Promise<boolean> {
+    const hash = createSHA256(password, salt);
+    return hash === hashedPassword;
   }
 }

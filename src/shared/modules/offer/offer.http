@@ -1,0 +1,59 @@
+### Get all offers
+GET http://localhost:4000/offers HTTP/1.1
+
+### Get offers with limit
+GET http://localhost:4000/offers?limit=10 HTTP/1.1
+
+### Get single offer by ID
+GET http://localhost:4000/offers/68fe769475b8ac83b78ec8e9 HTTP/1.1
+
+### Create new offer
+POST http://localhost:4000/offers HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Beautiful apartment in Amsterdam",
+  "description": "A nice place to stay in the heart of Amsterdam with great amenities",
+  "city": {
+    "name": "Amsterdam",
+    "latitude": 52.370216,
+    "longitude": 4.895168
+  },
+  "previewImage": "preview.jpg",
+  "images": ["img1.jpg", "img2.jpg", "img3.jpg"],
+  "isPremium": false,
+  "type": "apartment",
+  "bedrooms": 2,
+  "maxAdults": 4,
+  "price": 15000,
+  "goods": ["Breakfast", "Air conditioning", "Laptop friendly workspace"],
+  "authorId": "68fe621b3f2769ae2729a5dc",
+  "location": {
+    "latitude": 52.370216,
+    "longitude": 4.895168
+  }
+}
+
+### Update offer
+PATCH http://localhost:4000/offers/68fe769475b8ac83b78ec8e9 HTTP/1.1
+Content-Type: application/json
+
+{
+  "title": "Updated apartment title",
+  "price": 18000
+}
+
+### Delete offer
+DELETE http://localhost:4000/offers/68fe769475b8ac83b78ec8e9 HTTP/1.1
+
+### Get premium offers by city
+GET http://localhost:4000/offers/premium/Amsterdam HTTP/1.1
+
+### Get favorite offers
+GET http://localhost:4000/offers/favorites HTTP/1.1
+
+### Add offer to favorites
+POST http://localhost:4000/offers/68fe769475b8ac83b78ec8e9/favorite HTTP/1.1
+
+### Remove offer from favorites
+DELETE http://localhost:4000/offers/68fe769475b8ac83b78ec8e9/favorite HTTP/1.1
