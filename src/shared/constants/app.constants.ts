@@ -77,3 +77,6 @@ export const MAX_COMMENTS = 20;
 
 export const FIRST_WEEK_DAY = 1;
 export const LAST_WEEK_DAY = 7;
+
+export const DEFAULT_OFFER_COUNT = 60;
+export const PREMIUM_OFFER_COUNT = 3;

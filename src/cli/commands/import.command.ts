@@ -52,17 +52,13 @@ export class ImportCommand implements Command {
       previewImage: offer.previewImage,
       images: offer.images,
       isPremium: offer.isPremium,
-      isFavorite: offer.isFavorite,
       type: offer.type,
-      rating: offer.rating,
       bedrooms: offer.bedrooms,
       maxAdults: offer.maxAdults,
       price: offer.price,
       goods: offer.goods,
       authorId: user.id,
-      commentsCount: offer.commentsCount,
-      latitude: offer.latitude,
-      longitude: offer.longitude,
+      location: offer.location,
     });
   }
 
