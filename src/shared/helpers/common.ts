@@ -1,4 +1,5 @@
 import { CITIES } from '../constants/app.constants.js';
+import { ClassConstructor, plainToInstance } from 'class-transformer';
 
 export function generateRandomValue(min: number, max: number, numAfterDigit = 0) {
   return +((Math.random() * (max - min)) + min).toFixed(numAfterDigit);
@@ -43,4 +44,14 @@ export function shortenName(fullName: string): string {
   const firstName = parts[0];
   const lastName = parts.slice(1).join(' ');
   return `${firstName[0]}. ${lastName}`;
+}
+
+export function fillDTO<T, V>(someDto: ClassConstructor<T>, plainObject: V) {
+  return plainToInstance(someDto, plainObject, { excludeExtraneousValues: true });
+}
+
+export function createErrorObject(message: string) {
+  return {
+    error: message,
+  };
 }
