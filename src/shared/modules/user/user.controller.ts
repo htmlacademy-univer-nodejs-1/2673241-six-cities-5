@@ -10,6 +10,7 @@ import { fillDTO } from '../../helpers/index.js';
 import { UserRdo } from './rdo/user.rdo.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { LoginUserDto } from './dto/login-user.dto.js';
+import { ValidateDtoMiddleware } from '../../libs/rest/middleware/validate-dto.middleware.js';
 
 @injectable()
 export class UserController extends BaseController {
@@ -21,16 +22,23 @@ export class UserController extends BaseController {
     super(logger);
     this.logger.info('Register routes for UserController…');
 
-    this.addRoute({ path: '/register', method: HttpMethod.Post, handler: this.create });
-    this.addRoute({ path: '/login', method: HttpMethod.Post, handler: this.login });
+    this.addRoute({
+      path: '/register',
+      method: HttpMethod.Post,
+      handler: this.create,
+      middlewares: [new ValidateDtoMiddleware(CreateUserDto)]
+    });
+    this.addRoute({
+      path: '/login',
+      method: HttpMethod.Post,
+      handler: this.login,
+      middlewares: [new ValidateDtoMiddleware(LoginUserDto)]
+    });
     this.addRoute({ path: '/logout', method: HttpMethod.Post, handler: this.logout });
     this.addRoute({ path: '/check', method: HttpMethod.Get, handler: this.checkAuth });
   }
 
-  public async create(
-    req: Request,
-    res: Response
-  ): Promise<void> {
+  public async create(req: Request, res: Response): Promise<void> {
     const body = req.body as CreateUserDto;
     const existsUser = await this.userService.findByEmail(body.email);
 
@@ -46,10 +54,7 @@ export class UserController extends BaseController {
     this.created(res, fillDTO(UserRdo, result));
   }
 
-  public async login(
-    req: Request,
-    res: Response
-  ): Promise<void> {
+  public async login(req: Request, res: Response): Promise<void> {
     const body = req.body as LoginUserDto;
     const user = await this.userService.findByEmail(body.email);
 
@@ -61,7 +66,11 @@ export class UserController extends BaseController {
       );
     }
 
-    const passwordValid = await this.userService.verifyPassword(body.password, user.password, this.configService.get('SALT'));
+    const passwordValid = await this.userService.verifyPassword(
+      body.password,
+      user.password,
+      this.configService.get('SALT')
+    );
 
     if (!passwordValid) {
       throw new HttpError(
