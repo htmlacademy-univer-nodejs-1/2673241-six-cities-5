@@ -11,6 +11,9 @@ import { UserRdo } from './rdo/user.rdo.js';
 import { CreateUserDto } from './dto/create-user.dto.js';
 import { LoginUserDto } from './dto/login-user.dto.js';
 import { ValidateDtoMiddleware } from '../../libs/rest/middleware/validate-dto.middleware.js';
+import { ValidateObjectIdMiddleware } from '../../libs/rest/middleware/validate-objectid.middleware.js';
+import { UploadFileMiddleware } from '../../libs/rest/middleware/upload-file.middleware.js';
+import { DocumentExistsMiddleware } from '../../libs/rest/middleware/document-exists.middleware.js';
 
 @injectable()
 export class UserController extends BaseController {
@@ -36,6 +39,16 @@ export class UserController extends BaseController {
     });
     this.addRoute({ path: '/logout', method: HttpMethod.Post, handler: this.logout });
     this.addRoute({ path: '/check', method: HttpMethod.Get, handler: this.checkAuth });
+    this.addRoute({
+      path: '/:userId/avatar',
+      method: HttpMethod.Post,
+      handler: this.uploadAvatar,
+      middlewares: [
+        new ValidateObjectIdMiddleware('userId'),
+        new DocumentExistsMiddleware(this.userService, 'User', 'userId'),
+        new UploadFileMiddleware(this.configService.get('UPLOAD_DIRECTORY'), 'avatar'),
+      ]
+    });
   }
 
   public async create(req: Request, res: Response): Promise<void> {
@@ -97,5 +110,22 @@ export class UserController extends BaseController {
       type: 'обычный'
     };
     this.ok(res, fillDTO(UserRdo, mockUser));
+  }
+
+  public async uploadAvatar(req: Request, res: Response): Promise<void> {
+    const { userId } = req.params;
+
+    if (!req.file) {
+      throw new HttpError(
+        StatusCodes.BAD_REQUEST,
+        'Avatar file is required',
+        'UserController'
+      );
+    }
+
+    const avatar = req.file.filename;
+    await this.userService.updateById(userId, { avatar });
+
+    this.created(res, { filepath: avatar });
   }
 }

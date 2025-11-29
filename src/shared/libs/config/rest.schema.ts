@@ -11,6 +11,8 @@ export type RestSchema = {
   DB_PASSWORD: string;
   DB_PORT: string;
   DB_NAME: string;
+  UPLOAD_DIRECTORY: string;
+  STATIC_DIRECTORY: string;
 }
 
 export const configRestSchema = convict<RestSchema>({
@@ -55,5 +57,17 @@ export const configRestSchema = convict<RestSchema>({
     format: String,
     env: 'DB_NAME',
     default: 'six-cities'
+  },
+  UPLOAD_DIRECTORY: {
+    doc: 'Directory for uploaded files',
+    format: String,
+    env: 'UPLOAD_DIRECTORY',
+    default: '/upload'
+  },
+  STATIC_DIRECTORY: {
+    doc: 'Directory for static files',
+    format: String,
+    env: 'STATIC_DIRECTORY',
+    default: '/static'
   },
 });
