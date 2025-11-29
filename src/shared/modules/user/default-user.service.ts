@@ -49,4 +49,8 @@ export class DefaultUserService implements UserService {
     const hash = createSHA256(password, salt);
     return hash === hashedPassword;
   }
+
+  public async exists(userId: string): Promise<boolean> {
+    return (await this.userModel.exists({ _id: userId })) !== null;
+  }
 }

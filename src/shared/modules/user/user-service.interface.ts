@@ -9,4 +9,5 @@ export interface UserService {
   findOrCreate(dto: CreateUserDto, salt: string): Promise<DocumentType<UserEntity>>;
   updateById(userId: string, dto: UpdateUserDto): Promise<DocumentType<UserEntity> | null>;
   verifyPassword(password: string, hashedPassword: string, salt: string): Promise<boolean>;
+  exists(userId: string): Promise<boolean>;
 }
