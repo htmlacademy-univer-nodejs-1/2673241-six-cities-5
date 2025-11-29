@@ -13,6 +13,7 @@ export type RestSchema = {
   DB_NAME: string;
   UPLOAD_DIRECTORY: string;
   STATIC_DIRECTORY: string;
+  JWT_SECRET: string;
 }
 
 export const configRestSchema = convict<RestSchema>({
@@ -69,5 +70,11 @@ export const configRestSchema = convict<RestSchema>({
     format: String,
     env: 'STATIC_DIRECTORY',
     default: '/static'
+  },
+  JWT_SECRET: {
+    doc: 'Secret key for JWT tokens',
+    format: String,
+    env: 'JWT_SECRET',
+    default: null
   },
 });

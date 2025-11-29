@@ -1,4 +1,4 @@
-import { defaultClasses, getModelForClass, modelOptions, prop } from '@typegoose/typegoose';
+import { defaultClasses, getModelForClass, modelOptions, prop, Ref } from '@typegoose/typegoose';
 import { User, UserType } from '../../types/index.js';
 import { createSHA256 } from '../../helpers/index.js';
 import { USER_TYPE, MIN_NAME_LENGTH, MAX_NAME_LENGTH } from '../../constants/app.constants.js';
@@ -55,6 +55,14 @@ export class UserEntity extends defaultClasses.TimeStamps implements User {
     type: () => String
   })
   public type!: UserType;
+
+  @prop({
+    required: false,
+    default: [],
+    ref: 'OfferEntity',
+    type: () => [String]
+  })
+  public favorites!: Ref<string>[];
 
   constructor(userData: User) {
     super();
