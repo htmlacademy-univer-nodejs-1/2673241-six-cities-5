@@ -16,6 +16,7 @@ import { ValidateObjectIdMiddleware } from '../../libs/rest/middleware/validate-
 import { UploadFileMiddleware } from '../../libs/rest/middleware/upload-file.middleware.js';
 import { DocumentExistsMiddleware } from '../../libs/rest/middleware/document-exists.middleware.js';
 import { PrivateRouteMiddleware } from '../../libs/rest/middleware/private-route.middleware.js';
+import { PublicRouteMiddleware } from '../../libs/rest/middleware/public-route.middleware.js';
 import { AuthService } from '../auth/index.js';
 
 @injectable()
@@ -33,7 +34,10 @@ export class UserController extends BaseController {
       path: '/register',
       method: HttpMethod.Post,
       handler: this.create,
-      middlewares: [new ValidateDtoMiddleware(CreateUserDto)]
+      middlewares: [
+        new PublicRouteMiddleware(),
+        new ValidateDtoMiddleware(CreateUserDto)
+      ]
     });
     this.addRoute({
       path: '/login',
