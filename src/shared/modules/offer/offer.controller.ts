@@ -13,6 +13,7 @@ import { ValidateObjectIdMiddleware } from '../../libs/rest/middleware/validate-
 import { ValidateDtoMiddleware } from '../../libs/rest/middleware/validate-dto.middleware.js';
 import { DocumentExistsMiddleware } from '../../libs/rest/middleware/document-exists.middleware.js';
 import { PrivateRouteMiddleware } from '../../libs/rest/middleware/private-route.middleware.js';
+import { CheckOwnerMiddleware } from '../../libs/rest/middleware/check-owner.middleware.js';
 import { CommentService } from '../comment/comment-service.interface.js';
 
 @injectable()
@@ -59,8 +60,9 @@ export class OfferController extends BaseController {
       middlewares: [
         new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
-        new ValidateDtoMiddleware(UpdateOfferDto),
         new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
+        new CheckOwnerMiddleware(this.offerService, 'offerId'),
+        new ValidateDtoMiddleware(UpdateOfferDto),
       ]
     });
     this.addRoute({
@@ -71,6 +73,7 @@ export class OfferController extends BaseController {
         new PrivateRouteMiddleware(),
         new ValidateObjectIdMiddleware('offerId'),
         new DocumentExistsMiddleware(this.offerService, 'Offer', 'offerId'),
+        new CheckOwnerMiddleware(this.offerService, 'offerId'),
       ]
     });
     this.addRoute({

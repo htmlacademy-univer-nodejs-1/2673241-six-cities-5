@@ -94,8 +94,7 @@ export class CreateOfferDto {
   @ArrayMinSize(1, { message: 'At least one amenity is required' })
   public goods!: Good[];
 
-  @IsString()
-  public authorId!: string;
+  public authorId?: string;
 
   @ValidateNested()
   @Type(() => LocationDto)

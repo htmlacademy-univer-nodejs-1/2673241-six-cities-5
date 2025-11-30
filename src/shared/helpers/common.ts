@@ -55,3 +55,7 @@ export function createErrorObject(message: string) {
     error: message,
   };
 }
+
+export function getFullServerPath(host: string, port: number): string {
+  return `http://${host}:${port}`;
+}
